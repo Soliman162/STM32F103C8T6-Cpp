@@ -25,9 +25,9 @@ enum class PORT : u8
     GPIOB_PORT=1,
     GPIOC_PORT=2,
 		GPIOD_PORT,
-		GPIOE_PORT,
-		GPIOF_PORT,
-		GPIOG_PORT
+		GPIOE_PORT
+		//GPIOF_PORT,
+		//GPIOG_PORT
 
 };
 
@@ -60,6 +60,7 @@ class GPIO_Pin
 		PIN  Pin_num;
 	  friend class EXTI_Def_t;
 	  friend class GPIO_CONFIG_t;
+		friend class DC_Motor;
 	public :
 		GPIO_Pin(PORT Copy_enumport_id,PIN copy_enumPin_num): Port_ID(Copy_enumport_id),Pin_num(copy_enumPin_num){}
 		virtual void SET_voidPin_Mode(void) = 0;

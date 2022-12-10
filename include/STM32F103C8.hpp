@@ -43,8 +43,8 @@ struct GPIO_REG_DEF_t{
 #define GPIOC     ((GPIO_REG_DEF_t *)0x40011000)
 #define GPIOD	  	((GPIO_REG_DEF_t *)0x40011400)
 #define GPIOE	  	((GPIO_REG_DEF_t *)0x40011800)
-#define GPIOF     ((GPIO_REG_DEF_t *)0x40011C00)
-#define GPIOG     ((GPIO_REG_DEF_t *)0x40012000)
+//#define GPIOF     ((GPIO_REG_DEF_t *)0x40011C00)
+//#define GPIOG     ((GPIO_REG_DEF_t *)0x40012000)
 
 /**************************************************************************/
 
@@ -175,6 +175,36 @@ struct UART_REG_DEF_t{
 #define UART3         ((UART_REG_DEF_t*)0x40004800)
 
 /*************************************************************************/
+/**************************************TIMER_REG**************************/
 
+struct TIMER_REG_DEF_t
+{
+	volatile u32 CR_1_2[2];
+	volatile u32 SMCR;
+	volatile u32 DIER;
+	volatile u32 SR;
+	volatile u32 EGR;
+	volatile u32 CCMR_1_2[2];
+	volatile u32 CCER;
+	volatile u32 CNT;
+	volatile u32 PSC;
+	volatile u32 ARR;
+	volatile u32 RCR;
+	volatile u32 CCR[4];
+	volatile u32 BDTR;
+	volatile u32 DCR;
+	volatile u32 DMAR;
+	
+};
+// timer 8   - 0x4001 37FF
+//  - 0x4001 2FFF timer 1
+
+/*							Advanced Timers										*/
+#define TIMER1 			((TIMER_REG_DEF_t *)0x40012C00)
+#define TIMER8			((TIMER_REG_DEF_t *)0x40013400)
+
+
+
+/*************************************************************************/
 
 #endif

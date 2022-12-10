@@ -4,12 +4,11 @@
 #include "STD_TYPES.hpp"
 
 /*Pin_Value*/
-enum class PIN_VALUE : u8
+enum  PIN_VALUE : u8
 {
 	GPIO_LOW  =0,
 	GPIO_HIGH =1
 };
-
 
 enum class PIN_MODE : u8
 {
@@ -38,24 +37,22 @@ enum class PIN_MODE : u8
 	INPUT_PULL_UP   = 0b1000
 };
 
-
-
-
 class GPIO_CONFIG_t : public GPIO_Pin
 {
 	private :
-		
-		//PORT PORT_ID;
-    //PIN  PIN_NUM;
     PIN_MODE   Pin_Mode;
-	
 	public :
 		
 		GPIO_CONFIG_t(PORT Copy_enumPortID, PIN Copy_enumPin, PIN_MODE Copy_Pin_Mode);
+	
 	  void SET_voidPin_Mode(void);
+		void SET_voidPin_Mode(PORT Copy_enumPortID, PIN Copy_enumPin, PIN_MODE Copy_Pin_Mode);
+	
 		void GPIO_voidSETPinValue( PIN_VALUE Pin_u8Value );
-		ERROR_enumSTATE GPIO_enumGETPinValue( u8 *Pin_ptru8Value );
-
+		void GPIO_voidSETPinValue( PORT Copy_enumPortID, PIN Copy_enumPin,PIN_VALUE Pin_u8Value );
+	
+		PIN_VALUE GPIO_enumGETPinValue(void);
+	
 };
 
 

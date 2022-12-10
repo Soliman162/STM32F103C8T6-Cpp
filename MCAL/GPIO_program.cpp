@@ -4,7 +4,7 @@
 
 #include "GPIO_interface.hpp"
 
-static GPIO_REG_DEF_t * GPIO_PORT[7] = {GPIOA,GPIOB,GPIOC,GPIOD,GPIOE,GPIOF,GPIOG};
+static GPIO_REG_DEF_t * GPIO_PORT[5] = {GPIOA,GPIOB,GPIOC,GPIOD,GPIOE};
 
 GPIO_CONFIG_t::GPIO_CONFIG_t(PORT Copy_enumPortID, PIN Copy_enumPin, PIN_MODE Copy_Pin_Mode)
 :GPIO_Pin(Copy_enumPortID,Copy_enumPin),Pin_Mode(Copy_Pin_Mode)
@@ -38,6 +38,33 @@ void GPIO_CONFIG_t::SET_voidPin_Mode(void)
 				}
 				
 }
+void GPIO_CONFIG_t::SET_voidPin_Mode(PORT Copy_enumPortID, PIN Copy_enumPin, PIN_MODE Copy_Pin_Mode)
+{
+				u8 Copy_u8pinNUM = static_cast<u8>(Copy_enumPin);
+	
+				if( Copy_Pin_Mode ==  PIN_MODE::INPUT_PULL_UP )
+				{
+					GPIO_PORT[static_cast<u8>(Copy_enumPortID)]->BSRR = (1<<static_cast<u8>(Copy_enumPin));
+					//Pin_Mode = (static_cast<PIN_MODE>(0b1000));
+
+				}else if( Copy_Pin_Mode ==  PIN_MODE::INPUT_PULL_DOWN )
+				{
+					GPIO_PORT[static_cast<u8>(Copy_enumPortID)]->BRR = (1<<static_cast<u8>(Copy_enumPin));
+				}
+
+				if( Copy_enumPin <= PIN::PIN_7 )
+				{
+					(GPIO_PORT[static_cast<u8>(Copy_enumPortID)]->CRL) &=  (~(0b1111<<(static_cast<u8>(Copy_enumPin) * 4) ) );
+					(GPIO_PORT[static_cast<u8>(Copy_enumPortID)]->CRL) |=  ( static_cast<u8>(Copy_Pin_Mode) << ( static_cast<u8>(Copy_enumPin)*4));
+
+				}else if( Copy_enumPin >= PIN::PIN_8 )
+				{
+					Copy_u8pinNUM -= 8;
+					
+					GPIO_PORT[static_cast<u8>(Copy_enumPortID)]->CRH &=  (~(0b1111<< (Copy_u8pinNUM * 4) ) ) ;
+					GPIO_PORT[static_cast<u8>(Copy_enumPortID)]->CRH |=  ( static_cast<u8>(Copy_Pin_Mode) << (Copy_u8pinNUM*4));
+				}
+}
 void GPIO_CONFIG_t::GPIO_voidSETPinValue (PIN_VALUE Pin_u8Value )
 {
 			if( Pin_u8Value == PIN_VALUE::GPIO_HIGH )
@@ -49,16 +76,20 @@ void GPIO_CONFIG_t::GPIO_voidSETPinValue (PIN_VALUE Pin_u8Value )
 					GPIO_PORT[static_cast<u8>(Port_ID)]->BRR = (1<<static_cast<u8>(Pin_num));
 			}
 }
-
-ERROR_enumSTATE GPIO_CONFIG_t::GPIO_enumGETPinValue (u8 *Pin_ptru8Value )
+void GPIO_voidSETPinValue( PORT Copy_enumPortID, PIN Copy_enumPin,PIN_VALUE Pin_u8Value )
 {
-		ERROR_enumSTATE LOC_u8State = ERROR_enumSTATE::STD_TYPES_OK;
+			if( Pin_u8Value == PIN_VALUE::GPIO_HIGH )
+			{
+					GPIO_PORT[static_cast<u8>(Copy_enumPortID)]->BSRR = (1<<static_cast<u8>(Copy_enumPin));
 
-		if( Pin_ptru8Value != NULL)
-		{
-			*Pin_ptru8Value = GET_BIT( GPIO_PORT[static_cast<u8>(Port_ID)]->IDR , static_cast<u8>(Pin_num) );
-		}
-		return LOC_u8State;
+			}else if (Pin_u8Value == PIN_VALUE::GPIO_LOW )
+			{
+					GPIO_PORT[static_cast<u8>(Copy_enumPortID)]->BRR = (1<<static_cast<u8>(Copy_enumPin));
+			}
+}
+PIN_VALUE GPIO_CONFIG_t::GPIO_enumGETPinValue (void)
+{
+	 return (static_cast<PIN_VALUE>(GET_BIT(GPIO_PORT[static_cast<u8>(Port_ID)]->IDR , static_cast<u8>(Pin_num))));
 }
 /*
 ERROR_enumSTATE GPIO_enumSETPinMODE( const GPIO_CONFIG_t * Copy_ptru8PIN )
