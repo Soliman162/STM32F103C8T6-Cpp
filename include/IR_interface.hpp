@@ -6,7 +6,7 @@
 #include "EXTI_interface.hpp"
 
 //()
-
+/*
 class IR : public GPIO_CONFIG_t , public EXTI_Def_t
 {
 	private :
@@ -20,7 +20,7 @@ class IR : public GPIO_CONFIG_t , public EXTI_Def_t
 		u8 IR_voidGET_Data(void);
 	
 };
-
+*/
 
 
 

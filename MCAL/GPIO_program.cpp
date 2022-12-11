@@ -76,7 +76,7 @@ void GPIO_CONFIG_t::GPIO_voidSETPinValue (PIN_VALUE Pin_u8Value )
 					GPIO_PORT[static_cast<u8>(Port_ID)]->BRR = (1<<static_cast<u8>(Pin_num));
 			}
 }
-void GPIO_voidSETPinValue( PORT Copy_enumPortID, PIN Copy_enumPin,PIN_VALUE Pin_u8Value )
+void GPIO_CONFIG_t::GPIO_voidSETPinValue( PORT Copy_enumPortID, PIN Copy_enumPin,PIN_VALUE Pin_u8Value )
 {
 			if( Pin_u8Value == PIN_VALUE::GPIO_HIGH )
 			{

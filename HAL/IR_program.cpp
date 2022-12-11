@@ -10,9 +10,9 @@
 #include "IR_interface.hpp"
 #include "IR_private.hpp"
 #include "IR_config.hpp"
-
+/*
 GPIO_CONFIG_t  IR(IR_PORT,IR_PIN,PIN_MODE::INPUT_FLOATING);
-EXTI_Def_t     IR_Int_PIN ;
+//EXTI_Def_t     IR_Int_PIN ;
 
 volatile u8 LOC_u8Flag = 0;
 volatile u32 LOC_u32Timer_Value[50] = {0}  ;
@@ -29,7 +29,7 @@ EXTI_Def_t( Copy_enumPortID,  Copy_enumPin,  TRIGGER_type::FALLING_TRIGGER, IR_e
 
 void IR_voidInit(void)
 {
-	/*
+	
     STK_voidInit();
     GPIO_enumSETPinMODE(&IR);
     NVIC_voidEnableIRQ(EXTI0_IR);
@@ -43,7 +43,7 @@ void IR_voidInit(void)
 
     EXTI_enumInit_Interrupt(&IR_Int_PIN);
     EXTI_enumEnable_Interrupt(&IR_Int_PIN);
-	*/
+	
 }
 
 static void IR_enumReceive_Signal(void)
@@ -91,4 +91,4 @@ u8 IR::IR_voidGET_Data(void)
 {
 	return Data_u8;
 }
-
+*/

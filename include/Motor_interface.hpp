@@ -3,7 +3,7 @@
 
 #include "STD_TYPES.hpp"
 #include "GPIO_interface.hpp"
-
+/*
 class DC_Motor : public GPIO_CONFIG_t
 {
 	private :
@@ -14,6 +14,6 @@ class DC_Motor : public GPIO_CONFIG_t
 		void DC_Motor_voidRotate_CCW(void);
 		void DC_Motor_voidSTOP(void);
 };
-
+*/
 
 #endif

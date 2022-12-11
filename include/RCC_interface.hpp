@@ -66,6 +66,8 @@ enum CLK_BUS : u8
 #define PWR_CLK     28
 #define DAC_CLK     29	
 
+
+
 void RCC_voidCLKInit(void);
 void RCC_voidPeripheralCLKEnable( CLK_BUS Copy_enumBUS ,u8 Copy_u8Peripheral);
 void RCC_voidPeripheralCLKDisable( CLK_BUS Copy_enumBUS ,u8 Copy_u8Peripheral);

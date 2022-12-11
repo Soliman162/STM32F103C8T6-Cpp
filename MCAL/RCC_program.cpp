@@ -30,7 +30,7 @@ void RCC_voidCLKInit(void)
       CLR_BIT( RCC->CFGR , SW_0);
       CLR_BIT( RCC->CFGR , SW_1);
       SET_BIT( RCC->CR , HSION );
-      while( (GET_BIT( RCC->CR , HSIRDY )) == 0 );
+      //while( (GET_BIT( RCC->CR , HSIRDY )) == 0 );
 
     #elif CLK_SOURCE == PLL
 
